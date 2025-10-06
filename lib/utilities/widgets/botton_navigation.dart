@@ -13,7 +13,7 @@ class _BottomnavigationState extends State<Bottomnavigation> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: 60 ,
       color: AppColors.background,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
