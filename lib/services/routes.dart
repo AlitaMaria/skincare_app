@@ -80,9 +80,13 @@ final router = GoRouter(
           name: GraphqlTestView.route,
           builder: (context, state) {
             final arg = state.uri.queryParameters;
+            TestModel? model;
+            if(state.error != null) {
+              model = state.extra as TestModel;
+            }
             return GraphqlTestView(
               title: arg['title'],
-              testModel: state.extra as TestModel,
+              testModel: model,
             );
           },
         ),
