@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:skincare_task/services/routes.dart' as routes;
+import 'package:skincare_task/statemanagement/character/character.dart';
+import 'package:skincare_task/statemanagement/my_state/detailcharacter.dart';
 
 import 'services/api_services.dart';
 
 void main() async {
   await initHiveForFlutter();
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider<CharacterData>(create: (_) => CharacterData()),
+        Provider<DetailCharacter>(create: (_) => DetailCharacter()),
+      ],
+
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

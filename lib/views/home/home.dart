@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:skincare_task/utilities/utilities.dart';
 import 'package:skincare_task/utilities/widgets/listview/categories.dart';
 import 'package:skincare_task/utilities/widgets/listview/product_collections.dart';
 import 'package:skincare_task/utilities/widgets/listview/products.dart';
+import 'package:skincare_task/views/graphql_test_view.dart';
 
 class Homescreen extends StatelessWidget {
   const Homescreen({super.key});
@@ -78,7 +80,9 @@ class Homescreen extends StatelessWidget {
               ),
               Spacer(),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.pushNamed(GraphqlTestView.route);
+                },
                 child: Text(
                   "View All",
                   style: Styles.getsmalltext(
