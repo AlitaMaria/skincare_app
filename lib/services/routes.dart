@@ -1,15 +1,17 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/widgets.dart' as DetailsScreen;
 import 'package:go_router/go_router.dart';
-// import 'package:skincare_task/services/models/test_ep_models.dart' hide Result;
+import 'package:skincare_task/services/models/episode_characters.dart';
+import 'package:skincare_task/services/models/get_episodes_model.dart';
 import 'package:skincare_task/utilities/widgets/widgets.dart';
 import 'package:skincare_task/views/category.dart';
+import 'package:skincare_task/views/character_listing_page.dart';
 import 'package:skincare_task/views/detailed_screen.dart';
 import 'package:skincare_task/views/graphql_test_view.dart';
 import 'package:skincare_task/views/mainscreen.dart';
 import 'package:skincare_task/views/screen1.dart' show Screen1;
 import 'package:skincare_task/views/test_grphql.dart';
+import '../views/Search/search.dart';
+import '../views/episode_characters.dart';
+import '../views/favoritesNew.dart';
 
 // import 'package:skincare_task/views/screen1.dart';
 final router = GoRouter(
@@ -30,6 +32,8 @@ final router = GoRouter(
         ),
       ],
     ),
+
+
     GoRoute(
       path: Mainscreen.route,
       name: Mainscreen.route,
@@ -37,6 +41,42 @@ final router = GoRouter(
         return const Mainscreen();
       },
       routes: [
+
+        GoRoute(
+          path: Search.route,
+          name: Search.route,
+          builder: (context, state) {
+
+            // final searchContent = state.uri.queryParameters['searchContent'];
+            return Search();
+          },
+        ),
+        GoRoute(
+          path: CharacterListingPage.route,
+          name: CharacterListingPage.route,
+          builder: (context, state) {
+            // final extra = state.extra as GetCharacterDetails;
+            final int page =
+                int.tryParse(state.uri.queryParameters['page'] ?? '1') ?? 1;
+
+            return CharacterListingPage(page: page);
+          },
+          routes: [
+            GoRoute(
+              path: Favorites.route,
+              name: Favorites.route,
+              builder: (context, state) {
+                Charactermodel? model;
+                if (state.error != null) {
+                  model = state.extra as Charactermodel;
+                }
+
+                return Favorites(model: model);
+              },
+            ),
+          ],
+        ),
+
         GoRoute(
           path: test_graphql.Route,
           name: test_graphql.Route,
@@ -73,6 +113,17 @@ final router = GoRouter(
               // getCharacterDetails: extra,
             );
           },
+          routes: [
+            GoRoute(
+              path: EpisodeCharacters.route,
+              name: EpisodeCharacters.route,
+              builder: (context, state) {
+
+                final id = state.uri.queryParameters['id'];
+                return EpisodeCharacters(id: id);
+              },
+            ),
+          ],
         ),
 
         GoRoute(
@@ -81,13 +132,10 @@ final router = GoRouter(
           builder: (context, state) {
             final arg = state.uri.queryParameters;
             TestModel? model;
-            if(state.error != null) {
+            if (state.error != null) {
               model = state.extra as TestModel;
             }
-            return GraphqlTestView(
-              title: arg['title'],
-              testModel: model,
-            );
+            return GraphqlTestView(title: arg['title'], testModel: model);
           },
         ),
       ],

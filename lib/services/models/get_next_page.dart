@@ -1,55 +1,37 @@
+// To parse this JSON data, do
+//
+//     final getNextPage = getNextPageFromJson(jsonString);
+
 import 'dart:convert';
 
-CharacterListModel characterListModelFromJson(String str) =>
-    CharacterListModel.fromJson(json.decode(str));
+GetNextPage getNextPageFromJson(String str) => GetNextPage.fromJson(json.decode(str));
 
-String characterListModelToJson(CharacterListModel data) =>
-    json.encode(data.toJson());
+String getNextPageToJson(GetNextPage data) => json.encode(data.toJson());
 
-class CharacterListModel {
-  Characters? characters;
-
-  CharacterListModel({this.characters});
-
-  factory CharacterListModel.fromJson(Map<String, dynamic> json) =>
-      CharacterListModel(
-        characters: json["characters"] == null
-            ? null
-            : Characters.fromJson(json["characters"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-    "characters": characters?.toJson(),
-  };
-}
-
-class Characters {
+class GetNextPage {
   Info? info;
   List<Result>? results;
 
-  Characters({this.info, this.results});
+  GetNextPage({
+    this.info,
+    this.results,
+  });
 
-  factory Characters.fromJson(Map<String, dynamic> json) => Characters(
+  factory GetNextPage.fromJson(Map<String, dynamic> json) => GetNextPage(
     info: json["info"] == null ? null : Info.fromJson(json["info"]),
-    results: json["results"] == null
-        ? []
-        : List<Result>.from(
-      json["results"]!.map((x) => Result.fromJson(x)),
-    ),
+    results: json["results"] == null ? [] : List<Result>.from(json["results"]!.map((x) => Result.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "info": info?.toJson(),
-    "results": results == null
-        ? []
-        : List<dynamic>.from(results!.map((x) => x.toJson())),
+    "results": results == null ? [] : List<dynamic>.from(results!.map((x) => x.toJson())),
   };
 }
 
 class Info {
   int? count;
   int? pages;
-  int? next;
+  dynamic next;
   int? prev;
 
   Info({
@@ -108,12 +90,4 @@ class Result {
     "status": status,
     "image": image,
   };
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-          other is Result && runtimeType == other.runtimeType && id == other.id;
-
-  @override
-  int get hashCode => id.hashCode;
 }

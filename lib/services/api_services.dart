@@ -26,6 +26,36 @@ query GetEpisodes($page: Int) {
 }
 
 ''');
+  static final getEpisodeCharacters=gql(r'''
+  query GetEpisode($id: ID!) {
+  episode(id: $id) {
+    id
+    name
+    characters {
+      name
+      gender
+      image
+    }
+  }
+}
+
+  ''');
+
+  static final getsearch=gql(r'''
+  query getCharacters($Search: String){
+  characters(filter:{name: $Search}){
+    results{
+      id
+      name
+      gender
+      species
+      status
+      image
+    }
+  }
+}
+  
+  ''');
 
   static final getCharacters = gql(r'''
 query getCharacters{
@@ -74,4 +104,29 @@ query characterById($id: ID!) {
 }
 
 ''');
+
+  static final pageNavigation=gql(r'''
+  
+  query characters($page: Int) {
+  
+  characters(page: $page) {
+    info {
+      count
+      pages
+      next
+      prev
+    }
+    results {
+      
+      id
+      name
+      gender
+      species
+      status
+      image
+    }
+  }
+}
+
+  ''');
 }

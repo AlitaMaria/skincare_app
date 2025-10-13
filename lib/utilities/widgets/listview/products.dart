@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:skincare_task/services/api_services.dart';
 import 'package:skincare_task/services/models/character_card_model.dart';
 import 'package:skincare_task/services/models/get_episodes_model.dart';
-import 'package:skincare_task/statemanagement/my_state/detailcharacter.dart';
+import 'package:skincare_task/state_management/my_state/detailcharacter.dart';
 
 import 'package:skincare_task/utilities/utilities.dart';
 import 'package:skincare_task/views/detailed_screen.dart';
@@ -80,7 +80,6 @@ class _ProductsState extends State<Products> {
                     return GestureDetector(
                       onTap: () {
                         final characterId = character.id;
-                        print(characterId);
                         context.pushNamed(
                           CharacterDetailScreen.route,
                           // extra: characterId,

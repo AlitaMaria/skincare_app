@@ -4,10 +4,14 @@ import 'package:skincare_task/utilities/utilities.dart';
 import 'package:skincare_task/utilities/widgets/listview/categories.dart';
 import 'package:skincare_task/utilities/widgets/listview/product_collections.dart';
 import 'package:skincare_task/utilities/widgets/listview/products.dart';
+import 'package:skincare_task/views/Search/search.dart';
 import 'package:skincare_task/views/graphql_test_view.dart';
 
-class Homescreen extends StatelessWidget {
-  const Homescreen({super.key});
+import '../character_listing_page.dart';
+
+class HomeScreen extends StatelessWidget {
+
+   HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,31 +19,37 @@ class Homescreen extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(24.0),
-          child: TextField(
-            decoration: InputDecoration(
-              hint: Row(
-                children: [
-                  Image.asset(
-                    "assets/icons/search-line 1.png",
-                    height: 22,
-                    width: 22,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12, top: 1, bottom: 1),
-                    child: Text(
-                      "Search Products",
-                      style: Styles.getRegulartext(
-                        fontsize: 15,
-                        color: AppColors.searchbartext,
+          child: InkWell(
+            onTap: ()=>context.pushNamed(
+              Search.route,
+            ),
+            child: TextField(
+            enabled: false,
+              decoration: InputDecoration(
+                hint: Row(
+                  children: [
+                    Image.asset(
+                      "assets/icons/search-line 1.png",
+                      height: 22,
+                      width: 22,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12, top: 1, bottom: 1),
+                      child: Text(
+                        "Search Products",
+                        style: Styles.getRegulartext(
+                          fontsize: 15,
+                          color: AppColors.searchbartext,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              hintStyle: TextStyle(color: Color.fromARGB(255, 238, 236, 236)),
-              enabledBorder: searchBorder(),
+                  ],
+                ),
+                hintStyle: TextStyle(color: Color.fromARGB(255, 238, 236, 236)),
+                enabledBorder: searchBorder(),
 
-              focusedBorder: searchBorder(),
+                focusedBorder: searchBorder(),
+              ),
             ),
           ),
         ),
@@ -53,7 +63,11 @@ class Homescreen extends StatelessWidget {
               ),
               Spacer(),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+
+                  context.pushNamed(
+                      CharacterListingPage.route, );
+                },
                 child: Text(
                   "View All",
                   style: Styles.getsmalltext(
