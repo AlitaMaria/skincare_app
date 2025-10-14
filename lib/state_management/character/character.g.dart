@@ -23,11 +23,11 @@ mixin _$CharacterData on _character, Store {
     () => super.hasException,
     name: '_character.hasException',
   )).value;
-  Computed<CharacterDetailModel?>? _$characterDetailModelComputed;
+  Computed<CharacterListModel?>? _$characterDetailModelComputed;
 
   @override
-  CharacterDetailModel? get characterDetailModel =>
-      (_$characterDetailModelComputed ??= Computed<CharacterDetailModel?>(
+  CharacterListModel? get characterDetailModel =>
+      (_$characterDetailModelComputed ??= Computed<CharacterListModel?>(
         () => super.characterDetailModel,
         name: '_character.characterDetailModel',
       )).value;
@@ -74,13 +74,13 @@ mixin _$CharacterData on _character, Store {
   );
 
   @override
-  CharacterDetailModel? get _characterDetailModel {
+  CharacterListModel? get _characterDetailModel {
     _$_characterDetailModelAtom.reportRead();
     return super._characterDetailModel;
   }
 
   @override
-  set _characterDetailModel(CharacterDetailModel? value) {
+  set _characterDetailModel(CharacterListModel? value) {
     _$_characterDetailModelAtom.reportWrite(
       value,
       super._characterDetailModel,

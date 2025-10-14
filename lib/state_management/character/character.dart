@@ -25,10 +25,10 @@ abstract class _character with Store {
   bool get hasException => _hasException;
 
   @observable
-  CharacterDetailModel? _characterDetailModel;
+  CharacterListModel? _characterDetailModel;
 
   @computed
-  CharacterDetailModel? get characterDetailModel => _characterDetailModel;
+  CharacterListModel? get characterDetailModel => _characterDetailModel;
 
   @action
   void putLoading(bool value) => _isLoading = value;
@@ -47,7 +47,7 @@ abstract class _character with Store {
       if(result.hasException || result.data?['character'] == null) {
         putException(true);
       } else {
-        _characterDetailModel = CharacterDetailModel.fromJson(result.data!['character']);
+        _characterDetailModel = CharacterListModel.fromJson(result.data!['character']);
       }
 
     } catch(e){

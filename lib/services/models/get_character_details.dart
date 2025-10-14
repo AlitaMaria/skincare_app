@@ -4,13 +4,13 @@
 
 import 'dart:convert';
 
-CharacterDetailModel characterDetailModelFromJson(String str) =>
-    CharacterDetailModel.fromJson(json.decode(str));
+CharacterListModel characterDetailModelFromJson(String str) =>
+    CharacterListModel.fromJson(json.decode(str));
 
-String characterDetailModelToJson(CharacterDetailModel data) =>
+String characterDetailModelToJson(CharacterListModel data) =>
     json.encode(data.toJson());
 
-class CharacterDetailModel {
+class CharacterListModel {
   String? id;
   String? name;
   String? gender;
@@ -22,7 +22,7 @@ class CharacterDetailModel {
   DateTime? created;
   List<Episode>? episode;
 
-  CharacterDetailModel({
+  CharacterListModel({
     this.id,
     this.name,
     this.gender,
@@ -35,9 +35,9 @@ class CharacterDetailModel {
     this.episode,
   });
 
-  factory CharacterDetailModel.fromJson(
+  factory CharacterListModel.fromJson(
     Map<String, dynamic> json,
-  ) => CharacterDetailModel(
+  ) => CharacterListModel(
     id: json["id"],
     name: json["name"],
     gender: json["gender"],

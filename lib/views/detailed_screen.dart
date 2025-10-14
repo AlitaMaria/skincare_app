@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:skincare_task/services/api_services.dart';
 import 'package:skincare_task/services/models/get_character_details.dart';
-import 'package:skincare_task/statemanagement/character/character.dart';
-import 'package:skincare_task/statemanagement/my_state/detailcharacter.dart';
+import 'package:skincare_task/state_management/character/character.dart';
+import 'package:skincare_task/state_management/my_state/detailcharacter.dart';
 import 'package:skincare_task/utilities/app_colors.dart';
 import 'package:skincare_task/utilities/utilities.dart';
+
+import 'episode_characters.dart';
 
 class CharacterDetailScreen extends StatefulWidget {
   final String? id;
@@ -130,17 +133,27 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                   runSpacing: 12,
                   children: episodes!.map((Episode) {
                     final isSelected = selectedepisode.contains(category);
+
+
                     return ChoiceChip(
                       label: Text("#${Episode.id}- ${Episode.name}"),
                       selected: isSelected,
-                      onSelected: (selected) {
-                        setState(() {
-                          if (selected) {
-                            selectedepisode.add(category);
-                          } else {
-                            selectedepisode.remove(category);
-                          }
-                        });
+
+                      onSelected: (_) {
+                        context.pushNamed(EpisodeCharacters.route,
+                            queryParameters: {'id':{Episode.id}});
+                        print("${Episode.id}");
+                        // setState(() {
+                        //   if (isSelected) {
+                        //     // context.pushNamed(
+                        //     //     EpisodeCharacters.route,
+                        //     //   queryParameters: {'id':episodeId}
+                        //     // );
+                        //     selectedepisode.add(category);
+                        //   } else {
+                        //     selectedepisode.remove(category);
+                        //   }
+                        // });
                       },
 
                       labelStyle: TextStyle(

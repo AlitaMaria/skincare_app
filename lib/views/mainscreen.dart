@@ -19,11 +19,11 @@ class Mainscreen extends StatefulWidget {
 class _MainscreenState extends State<Mainscreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = const [
-    Homescreen(),
-    Center(child: Text(' Favorites Content', style: TextStyle(fontSize: 30))),
-    Center(child: Text(' Menu Content', style: TextStyle(fontSize: 30))),
-    Center(child: Text(' Profile Content', style: TextStyle(fontSize: 30))),
+  final List<Widget> _screens = [
+    HomeScreen(),
+    const Center(child: Text(' Favorites Content', style: TextStyle(fontSize: 30))),
+    const Center(child: Text(' Menu Content', style: TextStyle(fontSize: 30))),
+    const Center(child: Text(' Profile Content', style: TextStyle(fontSize: 30))),
   ];
 
   @override

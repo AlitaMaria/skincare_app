@@ -4,7 +4,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:skincare_task/services/api_services.dart';
 import 'package:skincare_task/services/models/get_episodes_model.dart';
-import 'package:skincare_task/statemanagement/character/character.dart';
+import 'package:skincare_task/state_management/character/character.dart';
 import 'package:skincare_task/utilities/widgets/listview/products.dart';
 
 class GraphqlTestView extends StatelessWidget {
